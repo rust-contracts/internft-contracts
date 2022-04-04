@@ -40,7 +40,7 @@ impl Querier for WasmMockQuerier {
             Ok(v) => v,
             Err(e) => {
                 return SystemResult::Err(SystemError::InvalidRequest {
-                    error: format!("Parsing query request: {}", e.to_string()),
+                    error: format!("Parsing query request: {}", e),
                     request: bin_request.into(),
                 })
             }
@@ -67,7 +67,7 @@ impl WasmMockQuerier {
                     SystemResult::Ok(ContractResult::from(to_binary(&InternTokenInfo {
                         owner: Addr::unchecked(String::from("addr000") + token_id.as_str()),
                         approvals: vec![],
-                        name: token_id.to_string(),
+                        name: token_id,
                         description: "test".to_string(),
                         image: None,
                         extension: InternExtension {
